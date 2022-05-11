@@ -1,0 +1,3 @@
+[submodule "provisioning/roles/php"]
+	path = provisioning/roles/php
+	url = https://codeberg.org/ansible/php.git
