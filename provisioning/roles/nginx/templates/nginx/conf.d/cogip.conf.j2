@@ -1,0 +1,21 @@
+#jinja2: lstrip_blocks: "True"
+
+server {
+        listen 80;
+        root {{ site_web_path }};
+        index index.php index.html index.htm index.nginx-debian.html;
+        server_name {{ site_domain }};
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+        }
+
+        location ~ /\.ht {
+                deny all;
+        }
+}

@@ -1,0 +1,31 @@
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Update all packages to their latest version
+  apt:
+    name: '*'
+    state: latest
+
+- name: install python deps
+  apt:
+    name: '{{ db_python_deps }}'
+    state: present
+
+- name: install mysql
+  apt:
+    name: '{{ db_packages }}'
+    update_cache: yes
+
+- name: start up the mysql service
+  shell: 'service mysql start'
+
+- name: ensure mysql is enabled to run on startup
+  service: name=mysql state=started enabled=true
+
+- name: Create db_user
+  mysql_user:
+    name: '{{ db_name }}'
+    host: '{{ db_host }}'
+    password: '{{ db_password }}'
+    state: present

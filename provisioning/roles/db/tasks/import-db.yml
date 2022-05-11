@@ -1,0 +1,25 @@
+- name: check for database
+  mysql_db:
+    name: '{{ db_name }}'
+    state: present
+  register: database_exists
+
+- name: check variable
+  debug:
+    msg: '{{ database_exists }}'
+
+- name: create database
+  mysql_db:
+    name: '{{ db_name }}'
+    state: present
+  when: database_exists.db != 'cogip'
+
+- name: run init script
+  mysql_db:
+    state: import
+    name: '{{ db_name }}'
+    login_user: '{{ db_user }}'
+    login_password: '{{ db_password }}'
+    #encoding: latin1
+    target: '{{ db_init_path }}'
+  when: database_exists.db != 'cogip'

@@ -1,0 +1,3 @@
+---
+- import_tasks: tasks/install.yml
+- import_tasks: tasks/config.yml
