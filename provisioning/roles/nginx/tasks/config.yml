@@ -8,8 +8,12 @@
     src: '{{ role_path }}/templates/nginx/conf.d/cogip.conf.j2'
     dest: '{{ web_server_conf_path }}/conf.d/cogip.conf'
     mode: 0644
-  notify:
-    - restart nginx
+  # changed_when: true
+  # notify:
+  #   - restart nginx
+
+- name: Restart nginx
+  service: name=nginx state=restarted
 # - name: Install .htpasswd
 #   template:
 #     src: "{{ role_path }}/templates/nginx/matrix-synapse-metrics-htpasswd.j2"
