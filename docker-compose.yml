@@ -1,0 +1,33 @@
+version: '2.0'
+
+services:
+  nginx:
+    image: nginx:1.16.0-alpine
+    volumes:
+      - $PWD/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - $PWD/nginx/mime.types:/etc/nginx/mime.types:ro
+      - ./cogip-src:/var/www/html
+    ports:
+      - '80:80'
+    networks:
+      - frontend
+  db:
+    image: mariadb
+    restart: always
+    env_file: $PWD/.env.database
+    networks:
+      - backend
+  cogip_php:
+    image: php:7.4-fpm
+    depends_on:
+      - db
+    volumes:
+      - ./cogip-src:/var/www/html
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+  backend:
+
