@@ -1,6 +1,0 @@
-- name: install php
-  apt:
-    pkg:
-      - php-fpm
-      - php-mysql
-    update_cache: yes

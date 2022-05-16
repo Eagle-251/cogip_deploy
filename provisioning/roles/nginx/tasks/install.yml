@@ -1,7 +1,0 @@
-- name: install nginx
-  apt: name=nginx update_cache=yes state=latest
-
-- name: Start NGiNX
-  service:
-    name: nginx
-    state: started
