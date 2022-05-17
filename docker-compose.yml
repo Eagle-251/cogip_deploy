@@ -19,6 +19,7 @@ services:
     networks:
       - backend
     volumes:
+      #- $PWD/init.db:/docker-entrypoint-initdb.d
       - $PWD/cogip-src/database:/docker-entrypoint-initdb.d
       - $PWD/db:/var/lib/mysql 
   

@@ -109,7 +109,7 @@ ALTER TABLE `invoice`
 --
 -- Indexes for table `user`
 --
-WALTER TABLE `user`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`) USING BTREE;
 
@@ -157,10 +157,11 @@ ALTER TABLE `contact`
 ALTER TABLE `invoice`
   ADD CONSTRAINT `fk_invoice_company_id` FOREIGN KEY (`invoice_company_id`) REFERENCES `company` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_invoice_contact_id` FOREIGN KEY (`invoice_contact_id`) REFERENCES `contact` (`id`) ON DELETE SET NULL;
-
-INSERT INTO `user` (`username`, `password`, `mode`) VALUES('admin', 'admin123', 'winner');
-
 COMMIT;
+
+
+USE cogip;
+INSERT INTO `user` (`username`, `password`, `mode`) VALUES('admin', 'admin123', 'winner');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
